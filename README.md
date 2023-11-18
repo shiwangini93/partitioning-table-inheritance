@@ -1,4 +1,4 @@
-# table-inheritance
+# partitioning-table-inheritance
 
 In order to facilitate the necessary database modifications, the sequence for executing scripts is as follows:
 
