@@ -1,4 +1,4 @@
--- Use below query to validate whether index(round_amount_idx_partition_name) is getting used for not
+-- Use below query to validate whether index(round_amount_idx_partition_name) is getting used or not
 
 explain SELECT id, account_id , amount,  created_datetime 
 FROM transactions
