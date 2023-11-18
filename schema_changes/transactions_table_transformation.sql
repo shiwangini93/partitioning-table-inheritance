@@ -15,8 +15,8 @@ ALTER TABLE public.transactions2 ADD CONSTRAINT transactions_pk PRIMARY KEY (id)
 -- Add Foreign Key Constraint for 'account_id' referencing 'accounts' table
 ALTER TABLE transactions2 ADD CONSTRAINT account_id_transactions_fk FOREIGN KEY (account_id) REFERENCES accounts(id);
 
--- Note: The following line is commented out; it's a placeholder for creating an index.
-/*CREATE INDEX round_amount_idx ON transactions (account_id, amount) WHERE amount::numeric % 1 = 0; */
+-- Adding index.
+CREATE INDEX round_amount_idx ON transactions (account_id, amount) WHERE amount::numeric % 1 = 0; 
 
 
 -- Partition Function:
@@ -59,7 +59,9 @@ BEGIN
 
     -- Create the new partitioned table and insert data if it doesn't exist
     IF exist_check IS NULL THEN
-        generate_query = 'CREATE TABLE ' || table_name || ' (CHECK (created_datetime >= ''' || end_date || ''' AND created_datetime <= ''' || from_date || ''')) INHERITS (transactions2); CREATE INDEX round_amount_idx_' || table_name || ' ON ' || table_name || ' (account_id, amount) WHERE amount::NUMERIC % 1 = 0';
+        generate_query = 'CREATE TABLE ' || table_name || ' (CHECK (created_datetime >= ''' || end_date || ''' AND created_datetime <= ''' || from_date || ''')) INHERITS (transactions2);ALTER TABLE '|| table_name ||' ADD CONSTRAINT '|| table_name || '_pk PRIMARY KEY (id);
+ALTER TABLE '|| table_name || ' ADD CONSTRAINT account_id_'|| table_name || '_fk FOREIGN KEY (account_id) REFERENCES accounts(id);CREATE INDEX round_amount_idx_'|| table_name || ' ON ' || table_name || ' (account_id, amount) WHERE amount::NUMERIC % 1 = 0';
+  
         EXECUTE generate_query;
         EXECUTE insert_query;
     ELSE
