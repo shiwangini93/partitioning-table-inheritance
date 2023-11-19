@@ -37,7 +37,7 @@ BEGIN
     -- Create the new partitioned table and insert data if it doesn't exist
     IF exist_check IS NULL THEN
         generate_query = 'CREATE TABLE ' || table_name || ' (CHECK (created_datetime >= ''' || end_date || ''' AND created_datetime <= ''' || from_date || ''')) INHERITS (transactions);ALTER TABLE '|| table_name ||' ADD CONSTRAINT '|| table_name || '_pk PRIMARY KEY (id);
-ALTER TABLE '|| table_name || ' ADD CONSTRAINT account_id_'|| table_name || '_fk FOREIGN KEY (account_id) REFERENCES accounts(id);CREATE INDEX round_amount_idx_'|| table_name || ' ON ' || table_name || ' (account_id, amount) WHERE amount::NUMERIC % 1 = 0';
+ALTER TABLE '|| table_name || ' ADD CONSTRAINT account_id_'|| table_name || '_fk FOREIGN KEY (account_id) REFERENCES accounts(id); ALTER TABLE '|| table_name || ' ADD CONSTRAINT card_id_'|| table_name || '_fk FOREIGN KEY (card_id) REFERENCES cards(id); CREATE INDEX round_amount_idx_'|| table_name || ' ON ' || table_name || ' (account_id, amount) WHERE amount::NUMERIC % 1 = 0';
   
         EXECUTE generate_query;
         EXECUTE insert_query;

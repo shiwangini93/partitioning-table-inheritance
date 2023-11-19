@@ -12,6 +12,7 @@ In order to facilitate the necessary database modifications, the sequence for ex
 8. `transactions_data_move.sql`
 9. `table_rename.sql`
 10. `partition_function.sql`
+11. `adding_accounts_relations.sql`
 
 **Useful Notes:**
 - The project is divided into three distinct sections: `data_loading`, `schema_changes`, and `testing_script`, each serving its designated purpose. The `testing_script` contains scripts designed to validate index usage.
