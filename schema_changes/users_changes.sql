@@ -34,3 +34,8 @@ ALTER TABLE users ADD COLUMN created_datetime TIMESTAMP GENERATED ALWAYS AS (TO_
 ALTER TABLE users ADD COLUMN updated_datetime TIMESTAMP GENERATED ALWAYS AS (TO_TIMESTAMP(updated / 1000)) STORED;
 ALTER TABLE users ADD COLUMN birth_date_datetime TIMESTAMP GENERATED ALWAYS AS (TO_TIMESTAMP(birth_date / 1000)) STORED;
 
+-- Adding a primary key constraint to the 'id' column in the 'users' table
+ALTER TABLE public.users 
+ADD CONSTRAINT users_pk PRIMARY KEY (id);
+
+
