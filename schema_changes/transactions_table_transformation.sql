@@ -15,6 +15,10 @@ ALTER TABLE public.transactions2 ADD CONSTRAINT transactions_pk PRIMARY KEY (id)
 -- Add Foreign Key Constraint for 'account_id' referencing 'accounts' table
 ALTER TABLE transactions2 ADD CONSTRAINT account_id_transactions_fk FOREIGN KEY (account_id) REFERENCES accounts(id);
 
+-- Creating a foreign key constraint
+ALTER TABLE transactions2 
+ADD CONSTRAINT card_id_transactions_fk FOREIGN KEY (card_id) REFERENCES cards(id);
+
 -- Adding index.
 CREATE INDEX round_amount_idx ON transactions (account_id, amount) WHERE amount::numeric % 1 = 0; 
 
