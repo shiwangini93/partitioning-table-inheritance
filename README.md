@@ -15,7 +15,7 @@ In order to facilitate the necessary database modifications, the sequence for ex
 11. `adding_accounts_relations.sql`
 
 **Useful Notes:**
-- The project is divided into three distinct sections: `data_loading`, `schema_changes`, and `testing_script`, each serving its designated purpose. The `testing_script` contains scripts designed to validate index usage.
+- The project is divided into three distinct sections: `data_loading`, `schema_changes`,`db_diagrams` and `testing_script`, each serving its designated purpose. The `testing_script` contains scripts designed to validate index usage.
 - Instead of removing Unix timestamp columns (`created` and `updated`) from all tables, a new generated column with a more human-readable timestamp format has been introduced wherever necessary. If Unix timestamp columns are unnecessary, they can be removed.
 - To handle different address types, the `address_type` table has been introduced with relevant relationships to other tables. Additionally, an `address_category` type (ENUM) has been implemented, which can be further modified to accommodate additional address types.
 - Foreign key and primary key relationships, as well as indexes, are not automatically propagated to new partitions via inheritance. To address this, modifications have been made in the partition creation function to include necessary foreign keys, primary keys, and indexes whenever a new partition is created.
