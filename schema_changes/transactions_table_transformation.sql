@@ -20,7 +20,7 @@ ALTER TABLE transactions2
 ADD CONSTRAINT card_id_transactions_fk FOREIGN KEY (card_id) REFERENCES cards(id);
 
 -- Adding index.
-CREATE INDEX round_amount_idx ON transactions (account_id, amount) WHERE amount::numeric % 1 = 0; 
+CREATE INDEX round_amount_idx ON transactions2 (account_id, amount) WHERE amount::numeric % 1 = 0; 
 
 -- partition function 
 CREATE OR REPLACE FUNCTION public.create_partition_table_month_transactions()
